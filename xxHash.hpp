@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint> // for uint64_t
 #include <cassert> // for assert
+#include <string>
 
 namespace xxh
 {
@@ -268,6 +269,12 @@ namespace xxh
             return detail::xxh_len_9to16_64b(data, size);
         if (size <= 128)
             return detail::xxh_len_17to128_64b(data, size);
+    }
+
+    [[nodiscard]]
+    constexpr uint64_t xxHash64(const std::string &data)
+    {
+        return xxHash64(data.c_str(), data.size());
     }
 
     /// <summary>Decorator meant for ease of use.</summary>
